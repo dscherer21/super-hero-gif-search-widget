@@ -22,8 +22,21 @@ $( document ).ready(function() {
       //Clears out old Gifs
       $('#superGifsView').html('');
 
+      var counter;
+
+      
       //For loop to display all 10 gifs
       for (var counter = 0; counter < response.data.length; counter++) {
+
+        // Retrieving the URL for the still image
+      //BUG Changing all the images to the same gif when clicked
+      var imgURL = response.data[counter].images.original_still.url;
+      //Retrieving the URL for the moving image
+      var imgAction = response.data[counter].images.original.url;
+      console.log(imgURL);
+
+      // Creating an element to hold the image
+      var image = $("<img src='" + imgURL + "' class='img img-thumbnail' alt='" + hero + "' data-state='still' data-still='" + imgURL + "' data-animate='" + imgAction + "'>");
 
       // Creating a div to hold the hero
       var heroDiv = $("<div class='hero col-sm-3'>");
@@ -38,32 +51,31 @@ $( document ).ready(function() {
       // Displaying the rating
       heroDiv.append(pOne);
 
-      // Retrieving the URL for the still image
-      //BUG Changing all the images to the same gif when clicked
-      //var imgURL = response.data[counter].images.original_still.url;
-      //Retrieving the URL for the moving image
-      var imgAction = response.data[counter].images.original.url;
-      console.log(imgAction);
-
-      // Creating an element to hold the image
-      var image = $("<a class='action'><img src='" + imgAction + "' class='img img-thumbnail' alt='" + hero + "'></a>");
-
       // Appending the image
       heroDiv.append(image);
-
-      //when img is clicked on change source to moving gif
-      //$('.action').on('click', function() {
-        //$('.img').attr('src', 'imgAction');
-      //});
 
       // Calls all the gifs to be displayed into the #superGifsView div
       $("#superGifsView").append(heroDiv);
     };
 
-    //when img is clicked on change source to moving gif
-    //$('.action').on('click', function() {
-      //$('.img').attr('src', 'response.data[counter].images.original.url');
-    //});
+    //when class img is clicked run function...
+    $(".img").on("click", function() {
+      //variable state is equal to the data-state attribute of the img class img element
+      var state = $(this).attr('data-state');
+      //if state still is true...
+      if (state === 'still') {
+        //change img src to data-animate url and data-state to animate
+        $(this).attr('src', $(this).attr('data-animate'));
+        $(this).attr('data-state', 'animate');
+      } 
+
+      else {
+        //if state still is false...
+        //change img src to data-still url and data-state to still
+        $(this).attr('src', $(this).attr('data-still'));
+        $(this).attr('data-state', 'still');
+      };
+    });
   });
 
   };

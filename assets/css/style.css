@@ -3,7 +3,7 @@
 }
 
 body {
-  background-image: url('../images/comicbookbackground.jpg');
+  background-image: url('../images/comicbackground.jpg');
   background-position: center;
   background-size: cover;
   font-family: 'Bangers', cursive;
@@ -30,7 +30,8 @@ hr {
 }
 
 h1 {
-  font-size: 32px;
+  font-size: 56px;
+  color: yellow;
 }
 
 button, div, form, input {
@@ -43,7 +44,7 @@ button, div, form, input {
 
 .navbar-fixed-bottom {
 	background-color: #3d3d3d;
-	color: rgba(255,255,255,.7);
+	color: rgba(255,255,255,.6);
 	padding: 20px;
   width: 100%;
 }
