@@ -3,7 +3,7 @@ $( document ).ready(function() {
 
 
   // Initial array of superGifs
-  var superGifs = ["Deadpool", "Spiderman", "Batman", "Thor"];
+  var superGifs = ["Deadpool", "Spiderman", "Batman", "Thor", "Link", "Megaman"];
 
   // displayGifInfo function re-renders the HTML to display the appropriate content
   function displayGifInfo() {
@@ -19,11 +19,14 @@ $( document ).ready(function() {
       console.log("Getting a response!");
       console.log(response);
 
+      //Clears out old Gifs
+      $('#superGifsView').html('');
+
       //For loop to display all 10 gifs
       for (var counter = 0; counter < response.data.length; counter++) {
 
       // Creating a div to hold the hero
-      var heroDiv = $("<div class='hero'>");
+      var heroDiv = $("<div class='hero col-sm-3'>");
 
       // Storing the rating data
       var rating = response.data[counter].rating;
@@ -35,19 +38,32 @@ $( document ).ready(function() {
       // Displaying the rating
       heroDiv.append(pOne);
 
-      // Retrieving the URL for the image
-      var imgURL = response.data[counter].images.original.url;
-      console.log(imgURL);
+      // Retrieving the URL for the still image
+      //BUG Changing all the images to the same gif when clicked
+      //var imgURL = response.data[counter].images.original_still.url;
+      //Retrieving the URL for the moving image
+      var imgAction = response.data[counter].images.original.url;
+      console.log(imgAction);
 
       // Creating an element to hold the image
-      var image = $("<img src='" + imgURL + "' class='img' alt='" + hero + "'>");
+      var image = $("<a class='action'><img src='" + imgAction + "' class='img img-thumbnail' alt='" + hero + "'></a>");
 
       // Appending the image
       heroDiv.append(image);
 
-      // Replaces all the previous superGifs with new hero gifs
+      //when img is clicked on change source to moving gif
+      //$('.action').on('click', function() {
+        //$('.img').attr('src', 'imgAction');
+      //});
+
+      // Calls all the gifs to be displayed into the #superGifsView div
       $("#superGifsView").append(heroDiv);
     };
+
+    //when img is clicked on change source to moving gif
+    //$('.action').on('click', function() {
+      //$('.img').attr('src', 'response.data[counter].images.original.url');
+    //});
   });
 
   };
@@ -66,7 +82,7 @@ $( document ).ready(function() {
       // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
       var a = $("<button>");
       // Adding a class of gifBtn to our button
-      a.addClass("gifBtn");
+      a.addClass("gifBtn btn btn-primary");
       // Adding a data-attribute
       a.attr("data-name", superGifs[i]);
       // Providing the initial button text

@@ -2,6 +2,48 @@
   box-sizing: border-box;
 }
 
+body {
+  background-image: url('../images/comic-book-background-dots.png');
+  background-position: center;
+  background-size: cover;
+  font-family: 'Bangers', cursive;
+}
+
+#searchMenu {
+  background-image: url('../images/orangespeechbubble.png');
+  z-index: 2;
+  padding: 290px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.btn {
+  font-size: 24px;
+}
+
+#gifForm {
+  font-size: 24px;
+}
+
+hr {
+  opacity: 0;
+}
+
+h1 {
+  font-size: 32px;
+}
+
 button, div, form, input {
   margin: 10px;
+}
+
+.hero {
+  font-size: 26px;
+}
+
+.navbar-fixed-bottom {
+	background-color: #3d3d3d;
+	color: rgba(255,255,255,.7);
+	padding: 20px;
+  width: 100%;
 }
